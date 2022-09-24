@@ -21,11 +21,21 @@ jobs:
         with:
           issue-id: ${{ github.event.inputs.issue-id }}
           dir-name: ${{ github.event.inputs.dir-name }}
+
       - name: get the output branch name
         run: echo "the new branch is ${{ steps.get-branch-name.outputs.branch-name }}"
-      - name: Create Branch
-        uses: peterjgrainger/action-create-branch@v2.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: checkout repo
+        uses: actions/checkout@v3
+
+      - name: make a file
+        run: echo "# ${{ steps.get-branch-name.outputs.branch-name }}" > myfile.md
+
+      - name: commit readme
+        uses: EndBug/add-and-commit@v9
         with:
-          branch: ${{ steps.get-branch-name.outputs.branch-name }}
+          message: heres the readme commit msg
+          committer_name: GitHub Actions
+          committer_email: 41898282+github-actions[bot]@users.noreply.github.com
+          new_branch: ${{ steps.get-branch-name.outputs.branch-name }}
+          add: "myfile.md"
