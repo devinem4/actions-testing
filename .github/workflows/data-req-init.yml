@@ -1,0 +1,22 @@
+name: data-req-initializer
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue-id:
+        description: "Github Issue Number"
+        required: true
+
+jobs:
+  data_req_init_job:
+    runs-on: ubuntu-latest
+    name: A job to init a data request
+    steps:
+      - name: Get inputs action step
+        id: get_input
+        uses: gammaflauge/datareq-init-actions@v0.1
+        with:
+          issue-id: github.event.inputs.issue_id
+          dir-name: "fancy-project-title"
+      - name: get the output branch name
+        run: echo "the new branch is ${{ steps.get_input.outputs.branch-name }}"
