@@ -1,4 +1,4 @@
-on: [push]
+on: [workflow_dispatch]
 
 jobs:
   hello_world_job:
@@ -9,8 +9,7 @@ jobs:
         id: hello
         uses: gammaflauge/hello-world-javascript-action@v1.1
         with:
-          who-to-greet: 'Tony Touchdown'
+          who-to-greet: "Tony Touchdown"
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
-

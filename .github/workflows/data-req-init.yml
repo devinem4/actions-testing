@@ -16,7 +16,7 @@ jobs:
         id: get_input
         uses: gammaflauge/datareq-init-actions@v0.1
         with:
-          issue-id: github.event.inputs.issue_id
+          issue-id: ${{ github.event.inputs.issue-id }}
           dir-name: "fancy-project-title"
       - name: get the output branch name
         run: echo "the new branch is ${{ steps.get_input.outputs.branch-name }}"
