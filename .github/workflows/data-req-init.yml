@@ -6,6 +6,9 @@ on:
       issue-id:
         description: "Github Issue Number"
         required: true
+      dir-name:
+        description: "New directory name (ie, lastname-fancy-project)"
+        required: true
 
 jobs:
   data_req_init_job:
@@ -17,6 +20,6 @@ jobs:
         uses: gammaflauge/datareq-init-actions@v0.1
         with:
           issue-id: ${{ github.event.inputs.issue-id }}
-          dir-name: "fancy-project-title"
+          dir-name: ${{ github.event.inputs.dir-name }}
       - name: get the output branch name
         run: echo "the new branch is ${{ steps.get_input.outputs.branch-name }}"
